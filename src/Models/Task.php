@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Models;
+
+use PDO;
+use App\Models\Task;
+use Config\Database;
+
+class Task
+{
+    private ?int $id_todo;
+    private ?string $title;
+    private ?string $description;
+    private ?string $status;
+    private ?string $creation_date;
+    private ?string $modification_date;
+
+    public function __construct(?int $id_todo, ?string $title, ?string $description, ?string $status, ?string $creation_date, ?string $modification_date)
+    {
+        $this->id_todos = $id_todo;
+        $this->title = $title;
+        $this->description = $description;
+        $this->status = $status;
+        $this->creation_date = $creation_date;
+        $this->modification_date = $modification_date;
+    }
+
+
+// Les GET
+    public function getIdTodo(): ?int
+    {
+        return $this->id_todo;
+    }
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+    public function getCreationDate(): ?string
+    {
+        return $this->creation_date;
+    }
+    public function getModificationDate(): ?string
+    {
+        return $this->modification_date;
+    }
+
+// Les SET
+    public function setIdTodo(?int $id_todo): void
+    {
+        $this->id_todo = $id_todo;
+    }
+    public function setTitle(?string $title): void
+    {
+        $this->title = $title;
+    }
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+    public function setStatus(?string $status): void
+    {
+        $this->status = $status;
+    }
+    public function setCreationDate(?string $creation_date): void
+    {
+        $this->creation_date = $creation_date;
+    }
+    public function setModificationDate(?string $modification_date): void
+    {
+        $this->modification_date = $modification_date;
+    }
+}
