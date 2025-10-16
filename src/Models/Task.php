@@ -8,16 +8,16 @@ use Config\Database;
 
 class Task
 {
-    private ?int $id_todo;
+    private ?string $id;
     private ?string $title;
     private ?string $description;
     private ?string $status;
     private ?string $creation_date;
     private ?string $modification_date;
 
-    public function __construct(?int $id_todo, ?string $title, ?string $description, ?string $status, ?string $creation_date, ?string $modification_date)
+    public function __construct(?string $id, ?string $title, ?string $description, ?string $status, ?string $creation_date, ?string $modification_date)
     {
-        $this->id_todos = $id_todo;
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->status = $status;
@@ -27,9 +27,9 @@ class Task
 
 
 // Les GET
-    public function getIdTodo(): ?int
+    public function getId(): ?string
     {
-        return $this->id_todo;
+        return $this->id;
     }
     public function getTitle(): ?string
     {
@@ -53,27 +53,27 @@ class Task
     }
 
 // Les SET
-    public function setIdTodo(?int $id_todo): void
+    public function setId(string $id): void
     {
-        $this->id_todo = $id_todo;
+        $this->id = $id;
     }
-    public function setTitle(?string $title): void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
-    public function setDescription(?string $description): void
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
-    public function setStatus(?string $status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
-    public function setCreationDate(?string $creation_date): void
+    public function setCreationDate(string $creation_date): void
     {
         $this->creation_date = $creation_date;
     }
-    public function setModificationDate(?string $modification_date): void
+    public function setModificationDate(string $modification_date): void
     {
         $this->modification_date = $modification_date;
     }
