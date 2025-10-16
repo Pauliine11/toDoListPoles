@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use PDO;
-use App\Models\Task;
 use Config\Database;
+use MongoDB\Driver\BulkWrite;
+use MongoDB\Driver\Exception\BulkWriteException;
+use MongoDB\Driver\Query;
+use mysql_xdevapi\Exception;
 
 class Task
 {
@@ -25,8 +27,47 @@ class Task
         $this->modification_date = $modification_date;
     }
 
+    /**
+     * Sauvegarde une tâche dans la base MongoDB
+     */
+    public function saveTask()
+    {
+        // Récupère la connexion à MongoDB (via ma classe Database)
+        $mongo = Database::getConnection();
+        // Nom de la base et de la collection (équivalent des tables en SQL)
+        $namedatabase = 'toDoListPoles';
+        $nameCollection = 'task';
 
-// Les GET
+        // Prépare les données à insérer sous forme de tableau associatif
+        // En MongoDB, chaque document est un tableau clé/valeur
+        $data = [
+            'title' => $this->title,
+            'description' => $this->description,
+            'status' => $this->status,
+            'creation_date' => $this->creation_date,
+            'modification_date' => $this->modification_date,
+        ];
+
+        // Création d’un objet "BulkWrite"
+        // → Permet d’envoyer une ou plusieurs opérations (insert, update, delete)
+        $bulk = new BulkWrite();
+
+        // On ajoute l’opération d’insertion
+        $bulk->insert($data);
+
+        try {
+            // Envoie la requête à MongoDB (exécution de l’écriture)
+            $mongo->executeBulkWrite($namedatabase . "." . $nameCollection, $bulk);
+            return true;
+        } catch (BulkWriteException $e) {
+            // En cas d’erreur (connexion, requête, etc.)
+            echo "Erreur d'insertion : " . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    //les getteurs
     public function getId(): ?string
     {
         return $this->id;
@@ -52,8 +93,8 @@ class Task
         return $this->modification_date;
     }
 
-// Les SET
-    public function setId(string $id): void
+    //les setteurs
+    public function setId(string $id)
     {
         $this->id = $id;
     }
