@@ -222,6 +222,41 @@ class Task
         }
     }
 
+    public function updateStatus()
+    {
+        // Récupère la connexion à MongoDB (via ma classe Database)
+        $mongo = Database::getConnection();
+        // Nom de la base et de la collection (équivalent des tables en SQL)
+        $namedatabase = 'toDoListPoles';
+        $nameCollection = 'task';
+
+        //l'id de notre objet courant
+        $id = $this->id;
+        // Données à mettre à jour
+        $data = [
+            'status' => $this->status,
+            'modification_date' => $this->modification_date
+        ];
+
+        // Création de l’opération de mise à jour
+        $bulk = new BulkWrite();
+
+        // On recherche le document à modifier via son _id
+        $filter = ['_id' => new \MongoDB\BSON\ObjectID($id)];
+
+        // L’opérateur "$set" permet de modifier uniquement les champs précisés
+        $bulk->update($filter, ['$set' => $data]);
+
+        try {
+            $mongo->executeBulkWrite($namedatabase . "." . $nameCollection, $bulk);
+            // Retourne true si la mise à jour a réussi
+            return true;
+        } catch (Exception $e) {
+            // Retourne false en cas d'erreur
+            return false;
+        }
+    }
+
     public function getTasksByStatus(string $status): array
     {
         // Récupère la connexion à MongoDB (via ma classe Database)
