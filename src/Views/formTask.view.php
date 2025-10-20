@@ -4,9 +4,9 @@ require_once(__DIR__ . "/partials/head.view.php");
 <h1 class="text-center text-warning fw-bold m-2"><?php if (isset($myTask)) echo 'Modifier une tache';
                                                     else echo 'Ajouter une tache'; ?> :</h1>
 <form method="POST">
-    <div class="col-md-4 mx-auto d-block mt-5">
+    <div class="col-md-4 mx-auto d-block mt-5 border border-4 border-light p-2">
         <div class="mb-3">
-            <label for="title" class="form-label fw-bold text-dark">Titre</label>
+            <label for="title" class="form-label fw-bold text-light">Titre</label>
             <input type="text" name="title" class="form-control" value="<?php if (isset($myTask)) echo  $myTask->getTitle() ?>">
             <?php
             if (isset($this->arrayError['title'])) {
@@ -15,7 +15,7 @@ require_once(__DIR__ . "/partials/head.view.php");
             ?>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label fw-bold text-dark">Description de la tache</label>
+            <label for="description" class="form-label fw-bold text-light">Description de la tache</label>
             <textarea name="description" rows="10" class="form-control"><?php if (isset($myTask)) echo  $myTask->getDescription() ?></textarea>
             <?php
             if (isset($this->arrayError['description'])) {
@@ -24,7 +24,7 @@ require_once(__DIR__ . "/partials/head.view.php");
             ?>
         </div>
         <div class="mb-3">
-            <label for="status" class="form-label fw-bold text-dark">Statut</label>
+            <label for="status" class="form-label fw-bold text-light">Statut</label>
             <select name="status" class="form-select">
                 <option value="Urgent">Urgente</option>
                 <option value="A faire">A faire</option>
