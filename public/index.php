@@ -10,5 +10,8 @@ $router = new Router();
  */
 $router->addRoute('/', 'HomeController', 'index');
 $router->addRoute('/ajout', 'TaskController', 'addTask');
+$router->addRoute('/tache', 'TaskController', 'show');
+$router->addRoute('/modifier', 'TaskController', 'editTask');
+$router->addRoute('/supprimer', 'TaskController', 'deleteTask');
 
 $router->handleRequest();

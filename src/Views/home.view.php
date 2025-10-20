@@ -10,10 +10,10 @@ if (!empty($resultTasks)) {
 ?>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <span class="badge rounded-pill text-bg-warning"><?= $task->getStatus() ?></span>
                 <h3 class="card-title"><?= $task->getTitle() ?></h3>
+                <span class="badge rounded-pill text-bg-warning"><?= $task->getStatus() ?></span>
                 <p class="card-text"><?= $task->getDescription() ?></p>
-                <a href="#" class="btn btn-primary">voir +</a>
+                <a href="/tache?id=<?= $task->getId() ?>" class="btn btn-primary">voir +</a>
             </div>
         </div>
 <?php

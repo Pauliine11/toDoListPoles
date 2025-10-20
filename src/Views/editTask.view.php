@@ -1,13 +1,12 @@
 <?php
 require_once(__DIR__ . "/partials/head.view.php");
 ?>
-<h1 class="text-center text-warning fw-bold m-2"><?php if (isset($myTask)) echo 'Modifier une tache';
-                                                    else echo 'Ajouter une tache'; ?> :</h1>
+<h1 class="text-center text-warning fw-bold m-2">Modifier une tache :</h1>
 <form method="POST">
     <div class="col-md-4 mx-auto d-block mt-5">
         <div class="mb-3">
-            <label for="title" class="form-label fw-bold text-dark">Titre</label>
-            <input type="text" name="title" class="form-control" value="<?php if (isset($myTask)) echo  $myTask->getTitle() ?>">
+            <label for="title" class="form-label fw-bold text-dark">Titre :</label>
+            <input type="text" name="title" class="form-control">
             <?php
             if (isset($this->arrayError['title'])) {
                 echo "<p class='text-danger'> {$this->arrayError['title']} </p>";
@@ -15,8 +14,8 @@ require_once(__DIR__ . "/partials/head.view.php");
             ?>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label fw-bold text-dark">Description de la tache</label>
-            <textarea name="description" rows="10" class="form-control"><?php if (isset($myTask)) echo  $myTask->getDescription() ?></textarea>
+            <label for="description" class="form-label fw-bold text-dark">Description de la tâche :</label>
+            <textarea name="description" rows="10" class="form-control"></textarea>
             <?php
             if (isset($this->arrayError['description'])) {
                 echo "<p class='text-danger'> {$this->arrayError['description']} </p>";
@@ -24,7 +23,7 @@ require_once(__DIR__ . "/partials/head.view.php");
             ?>
         </div>
         <div class="mb-3">
-            <label for="status" class="form-label fw-bold text-dark">Statut</label>
+            <label for="status" class="form-label fw-bold text-white">Statut</label>
             <select name="status" class="form-select">
                 <option value="Urgent">Urgente</option>
                 <option value="A faire">A faire</option>
@@ -36,18 +35,7 @@ require_once(__DIR__ . "/partials/head.view.php");
             <?php
             } ?>
         </div>
-        <?php
-        if (isset($myTask)) {
-            echo "<button class='btn btn-warning' type='submit' name='editTask'>Modifier</button>";
-        } else {
-            echo "<button class='btn btn-warning' type='submit' name='addTask'>Ajouter</button>";
-        }
-
-        if(isset($myTask)) {
-            echo "<button class='btn btn-danger' type='submit' name='deleteTask'>Supprimer</button>";
-        }
-
-        ?>
+        <button class="btn btn-warning" type="submit" name="addTask">Modifier</button>
     </div>
 </form>
 <?php
